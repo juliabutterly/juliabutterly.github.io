@@ -1,8 +1,3 @@
-import {
-  VisuallyHidden,
-  SecondaryCTAButton,
-  PrimaryCTAButton,
-} from "@ovotech/nebula";
 import React, { FunctionComponent, ReactNode } from "react";
 import {
   useOverlay,
@@ -20,15 +15,15 @@ import {
   FullHeightModal,
   CenteredModal,
   ModalContent,
-  CloseIcon,
   Heading,
   Title,
   ButtonContainer,
-  SingleButtonContainer,
 } from "./ModalWindow.styles";
+import styled from "styled-components";
 
 export interface ModalProps extends OverlayProps, AriaDialogProps {
   isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   fullHeight: boolean;
   name: string;
   title?: string;
@@ -37,8 +32,14 @@ export interface ModalProps extends OverlayProps, AriaDialogProps {
   padded: boolean;
 }
 
+const CLOSE = styled.a`
+  cursor: pointer;
+  color: #006400;
+  text-decoration: underline;
+`;
+
 export const ModalDialog: FunctionComponent<ModalProps> = (props) => {
-  const { title, children, fullHeight, onClose, width, padded } = props;
+  const { title, children, fullHeight, setIsOpen, width, padded } = props;
 
   // Handle interacting outside the dialog and pressing
   // the Escape key to close the modal.
@@ -56,6 +57,10 @@ export const ModalDialog: FunctionComponent<ModalProps> = (props) => {
     ref
   );
 
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <ModalOverlay>
       <FocusScope contain restoreFocus>
@@ -72,14 +77,7 @@ export const ModalDialog: FunctionComponent<ModalProps> = (props) => {
             <Modal {...panelProps} ref={ref}>
               <Heading>
                 <Title>{title}</Title>
-                {/* <CloseIcon
-                  onClick={onClose}
-                  name="cross"
-                  aria-label="Close pop-up"
-                  role="close"
-                >
-                  <VisuallyHidden>Close pop-up</VisuallyHidden>
-                </CloseIcon> */}
+                <CLOSE onClick={onClose}>X</CLOSE>
               </Heading>
               <ModalContent className="padded">{children}</ModalContent>
             </Modal>
@@ -109,11 +107,6 @@ export interface ModalDoubleButtonAreaProps {
   secondaryButtonText: string;
 }
 
-export type ModalSingleButtonAreaProps = Pick<
-  ModalDoubleButtonAreaProps,
-  "onPrimaryButtonClick" | "primaryButtonText"
->;
-
 export const ModalDoubleButtonArea = ({
   onPrimaryButtonClick,
   onSecondaryButtonClick,
@@ -121,34 +114,11 @@ export const ModalDoubleButtonArea = ({
   secondaryButtonText,
 }: ModalDoubleButtonAreaProps) => (
   <ButtonContainer>
-    <SecondaryCTAButton
-      type="button"
-      onClick={onSecondaryButtonClick}
-      fullWidth={"never"}
-    >
+    <button type="button" onClick={onSecondaryButtonClick}>
       {secondaryButtonText}
-    </SecondaryCTAButton>
-    <PrimaryCTAButton
-      type="submit"
-      onClick={onPrimaryButtonClick}
-      fullWidth={"never"}
-    >
+    </button>
+    <button type="submit" onClick={onPrimaryButtonClick}>
       {primaryButtonText}
-    </PrimaryCTAButton>
+    </button>
   </ButtonContainer>
-);
-
-export const ModalSingleButtonArea = ({
-  onPrimaryButtonClick,
-  primaryButtonText,
-}: ModalSingleButtonAreaProps) => (
-  <SingleButtonContainer>
-    <PrimaryCTAButton
-      type="submit"
-      onClick={onPrimaryButtonClick}
-      fullWidth={"never"}
-    >
-      {primaryButtonText}
-    </PrimaryCTAButton>
-  </SingleButtonContainer>
 );

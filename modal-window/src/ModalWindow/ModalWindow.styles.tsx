@@ -5,7 +5,6 @@ import {
   modalAppearNarrow,
   modalAppearWide,
 } from "./Animations";
-// import { styled } from "../../theme/theme";
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -25,11 +24,7 @@ export const Modal = styled.div<{
   padded: boolean;
 }>(
   ({ width, padded }) => css`
-    max-width: ${width === ModalWidth.Wide
-      ? "80rem"
-      : width === ModalWidth.Small
-      ? "56rem"
-      : "100vw"};
+    max-width: ${width === ModalWidth.Small ? "56rem" : "100vw"};
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -40,9 +35,6 @@ export const Modal = styled.div<{
     animation: ${modalAppearNarrow};
     @media (min-width: 440px) {
       animation: ${modalAppearWide};
-    }
-    .padded {
-      padding: ${padded ? `0 6rem 8.4rem` : `0 6rem 6 rem`};
     }
   `
 );
@@ -63,18 +55,6 @@ export const ModalContent = styled.div`
   width: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-`;
-
-export const CloseIcon = styled.img`
-  height: 6.4rem;
-  width: 6.4rem;
-  border-radius: 0 2px 0 0;
-  cursor: pointer;
-  padding: 15px;
-  color: green;
-  &:hover {
-    background-color: red;
-  }
 `;
 
 export const Heading = styled.div`
@@ -104,7 +84,6 @@ export const SingleButtonContainer = styled(ButtonContainer)`
 
 export const ModalStickyFooter = styled.div`
   width: 100%;
-  padding: 10px 15px;
   background-color: white;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
   position: absolute;
