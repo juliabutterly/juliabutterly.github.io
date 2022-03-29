@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 interface UpdatePaymentDetailsCTAProps {
+  text: string;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -12,6 +13,7 @@ const CTA = styled.a`
 `;
 
 export const LINK: FunctionComponent<UpdatePaymentDetailsCTAProps> = ({
+  text,
   setShowModal,
 }) => {
   const onClick = () => {
@@ -20,7 +22,7 @@ export const LINK: FunctionComponent<UpdatePaymentDetailsCTAProps> = ({
 
   return (
     <>
-      <CTA onClick={onClick}>click here</CTA>
+      <CTA onClick={onClick}>{text}</CTA>
     </>
   );
 };
