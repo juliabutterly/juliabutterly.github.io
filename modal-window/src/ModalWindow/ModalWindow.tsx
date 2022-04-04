@@ -74,7 +74,7 @@ export const ModalDialog: FunctionComponent<ModalProps> = (props) => {
             width,
           };
           return (
-            <Modal {...panelProps} ref={ref}>
+            <Modal {...panelProps} ref={ref} id="MODAL">
               <Heading>
                 <Title>{title}</Title>
                 <CLOSE onClick={onClose}>X</CLOSE>

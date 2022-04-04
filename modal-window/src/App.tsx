@@ -24,6 +24,17 @@ const LINKS = styled.div`
   flex-direction: column;
 `;
 
+const REPORT = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: white;
+  z-index: 1;
+`;
+
 const App = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const [showNewModal, setShowNewModal] = useState(false);
@@ -48,6 +59,12 @@ const App = (): JSX.Element => {
     width: ModalWidth.Small,
   };
 
+  // const onFocus = () => {
+  //   const a = document.getElementById("MODAL");
+  //   a!.style.bottom = "270px";
+  //   console.log("hello");
+  // };
+
   return (
     <>
       {showModal && (
@@ -68,6 +85,7 @@ const App = (): JSX.Element => {
               />
               <label htmlFor="input1">New IBAN</label>
               <TextField id="newIban" name="input1" />
+              {/* <TextField id="newIban" name="input1" onFocus={onFocus} /> */}
               <label htmlFor="input2">New IBAN</label>
               <TextField id="1" name="input2" />
               <label htmlFor="input3">New IBAN</label>
@@ -122,13 +140,13 @@ const App = (): JSX.Element => {
                 et/ou de gaz.
               </Hint>
             </FormFields>
-            <ModalStickyFooter>
-              <ButtonContainer>
-                <button type="button">Button 1</button>
-                <button type="submit">Button 2</button>
-              </ButtonContainer>
-            </ModalStickyFooter>
           </FormContainer>
+          <ModalStickyFooter>
+            <ButtonContainer>
+              <button type="button">Button 1</button>
+              <button type="submit">Button 2</button>
+            </ButtonContainer>
+          </ModalStickyFooter>
         </NewModalWindow>
       )}
 
@@ -139,6 +157,9 @@ const App = (): JSX.Element => {
           setShowModal={setShowNewModal}
         />
       </LINKS>
+      <REPORT>
+        {`VV = ${window.visualViewport.height}, WI = ${window.innerHeight}`}
+      </REPORT>
     </>
   );
 };
