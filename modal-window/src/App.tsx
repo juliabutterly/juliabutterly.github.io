@@ -11,6 +11,12 @@ import {
 } from "./ModalWindow/ModalWindow.styles";
 import { ModalWidth } from "./ModalWindow/ModalWindow.types";
 import { NewModalProps, NewModalWindow } from "./ModalWindowNew/ModalWindow";
+import {
+  NewFormContainer,
+  NewFormFields,
+  NewHint,
+  NewTextField,
+} from "./ModalWindowNew/ModalWindow.styles";
 
 const ButtonContainer = styled.div`
   width: 100%;
@@ -26,8 +32,8 @@ const LINKS = styled.div`
 
 const REPORT = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 0;
+  right: 0;
   width: 150px;
   height: 20px;
   border: 1px solid black;
@@ -55,15 +61,9 @@ const App = (): JSX.Element => {
     fullHeight: false,
     title: "iban",
     name: "modal",
-    padded: true,
     width: ModalWidth.Small,
+    withButtons: true,
   };
-
-  // const onFocus = () => {
-  //   const a = document.getElementById("MODAL");
-  //   a!.style.bottom = "270px";
-  //   console.log("hello");
-  // };
 
   return (
     <>
@@ -85,7 +85,6 @@ const App = (): JSX.Element => {
               />
               <label htmlFor="input1">New IBAN</label>
               <TextField id="newIban" name="input1" />
-              {/* <TextField id="newIban" name="input1" onFocus={onFocus} /> */}
               <label htmlFor="input2">New IBAN</label>
               <TextField id="1" name="input2" />
               <label htmlFor="input3">New IBAN</label>
@@ -111,42 +110,36 @@ const App = (): JSX.Element => {
 
       {showNewModal && (
         <NewModalWindow {...newProps}>
-          <FormContainer>
-            <FormFields>
+          <NewFormContainer>
+            <NewFormFields>
               <h4>IBAN</h4>
               <p>
                 Votre Novel IBAN sera pris en compte lors de votra paiment du
                 mois prochain.
               </p>
               <label htmlFor="currentIban">Current IBAN</label>
-              <TextField
+              <NewTextField
                 disabled
                 placeholder={"FR123456789"}
                 id="currentIban"
                 name="currentIban"
               />
               <label htmlFor="input1">New IBAN</label>
-              <TextField id="newIban" name="input1" />
+              <NewTextField id="newIban" name="input1" />
               <label htmlFor="input2">New IBAN</label>
-              <TextField id="1" name="input2" />
+              <NewTextField id="1" name="input2" />
               <label htmlFor="input3">New IBAN</label>
-              <TextField id="2" name="input3" />
+              <NewTextField id="2" name="input3" />
               <label htmlFor="input4">New IBAN</label>
-              <TextField id="3" name="input4" />
+              <NewTextField id="3" name="input4" />
               <label htmlFor="input5">New IBAN</label>
-              <TextField id="4" name="input5" />
-              <Hint as={"h5"}>
+              <NewTextField id="4" name="input5" />
+              <NewHint as={"h5"}>
                 Votre IBAN sera pris en compte pour vos contrats d'électricicité
                 et/ou de gaz.
-              </Hint>
-            </FormFields>
-          </FormContainer>
-          <ModalStickyFooter>
-            <ButtonContainer>
-              <button type="button">Button 1</button>
-              <button type="submit">Button 2</button>
-            </ButtonContainer>
-          </ModalStickyFooter>
+              </NewHint>
+            </NewFormFields>
+          </NewFormContainer>
         </NewModalWindow>
       )}
 

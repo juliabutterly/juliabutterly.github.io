@@ -11,13 +11,14 @@ import { FocusScope } from "@react-aria/focus";
 import { AriaDialogProps } from "@react-types/dialog";
 import { ModalWidth } from "./ModalWindow.types";
 import {
-  ModalOverlay,
-  FullHeightModal,
-  CenteredModal,
-  ModalContent,
-  Heading,
-  Title,
-  ButtonContainer,
+  NewModalOverlay,
+  NewFullHeightModal,
+  NewCenteredModal,
+  NewModalContent,
+  NewHeading,
+  NewTitle,
+  NewButtonContainer,
+  NewModalStickyFooter,
 } from "./ModalWindow.styles";
 import styled from "styled-components";
 
@@ -29,17 +30,16 @@ export interface NewModalProps extends OverlayProps, AriaDialogProps {
   title?: string;
   children?: ReactNode;
   width: ModalWidth;
-  padded: boolean;
+  withButtons?: boolean;
 }
 
 const CLOSE = styled.a`
   cursor: pointer;
   color: #006400;
-  text-decoration: underline;
 `;
 
 export const NewModalDialog: FunctionComponent<NewModalProps> = (props) => {
-  const { title, children, fullHeight, setIsOpen, width, padded } = props;
+  const { title, children, fullHeight, setIsOpen, width, withButtons } = props;
 
   // Handle interacting outside the dialog and pressing
   // the Escape key to close the modal.
@@ -62,29 +62,37 @@ export const NewModalDialog: FunctionComponent<NewModalProps> = (props) => {
   };
 
   return (
-    <ModalOverlay>
+    <NewModalOverlay>
       <FocusScope contain restoreFocus>
         {(() => {
-          const Modal = fullHeight ? FullHeightModal : CenteredModal;
+          const Modal = fullHeight ? NewFullHeightModal : NewCenteredModal;
           const panelProps = {
             ...overlayProps,
             ...dialogProps,
             ...modalProps,
-            padded,
             width,
+            withButtons,
           };
           return (
             <Modal {...panelProps} ref={ref}>
-              <Heading>
-                <Title>{title}</Title>
+              <NewHeading>
+                <NewTitle>{title}</NewTitle>
                 <CLOSE onClick={onClose}>X</CLOSE>
-              </Heading>
-              <ModalContent className="padded">{children}</ModalContent>
+              </NewHeading>
+              <NewModalContent>{children}</NewModalContent>
+              {withButtons && (
+                <NewModalStickyFooter>
+                  <NewButtonContainer>
+                    <button type="button">Button 1</button>
+                    <button type="submit">Button 2</button>
+                  </NewButtonContainer>
+                </NewModalStickyFooter>
+              )}
             </Modal>
           );
         })()}
       </FocusScope>
-    </ModalOverlay>
+    </NewModalOverlay>
   );
 };
 
@@ -113,12 +121,12 @@ export const ModalDoubleButtonArea = ({
   primaryButtonText,
   secondaryButtonText,
 }: ModalDoubleButtonAreaProps) => (
-  <ButtonContainer>
+  <NewButtonContainer>
     <button type="button" onClick={onSecondaryButtonClick}>
       {secondaryButtonText}
     </button>
     <button type="submit" onClick={onPrimaryButtonClick}>
       {primaryButtonText}
     </button>
-  </ButtonContainer>
+  </NewButtonContainer>
 );

@@ -35,7 +35,6 @@ export interface ModalProps extends OverlayProps, AriaDialogProps {
 const CLOSE = styled.a`
   cursor: pointer;
   color: #006400;
-  text-decoration: underline;
 `;
 
 export const ModalDialog: FunctionComponent<ModalProps> = (props) => {

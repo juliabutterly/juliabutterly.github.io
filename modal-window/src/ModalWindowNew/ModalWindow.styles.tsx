@@ -6,10 +6,11 @@ import {
   modalAppearWide,
 } from "./Animations";
 
-export const ModalOverlay = styled.div`
-  position: fixed;
+export const NewModalOverlay = styled.div`
+  position: absolute;
   top: 0;
   left: 0;
+  bottom: var(--offset-h, 0);
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
@@ -19,16 +20,14 @@ export const ModalOverlay = styled.div`
   animation: ${overlayAppear};
 `;
 
-export const Modal = styled.div<{
+const NewModal = styled.div<{
   width: ModalWidth;
-  padded: boolean;
 }>(
-  ({ width, padded }) => css`
-    max-width: ${width === ModalWidth.Small ? "56rem" : "100vw"};
+  ({ width }) => css`
+    max-width: ${width === ModalWidth.Small ? "56rem" : "--100vvw"};
     width: 100%;
     display: flex;
     flex-direction: column;
-    position: relative;
     border-radius: 0.4rem;
     background-color: white;
     box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.25);
@@ -36,39 +35,35 @@ export const Modal = styled.div<{
     @media (min-width: 440px) {
       animation: ${modalAppearWide};
     }
-
-    .padded {
-      box-sizing: border-box;
-      padding: ${padded ? `0 2.4rem 8.4rem` : `0 2.4rem 2.4rem`};
-    }
   `
 );
 
-export const FullHeightModal = styled(Modal)`
+export const NewFullHeightModal = styled(NewModal)`
   height: 100%;
   max-height: 94vh;
 `;
 
-export const CenteredModal = styled(Modal)`
+export const NewCenteredModal = styled(NewModal)`
   max-height: 95vh;
   @media (min-height: 600px) {
     max-height: 85vh;
   }
 `;
 
-export const ModalContent = styled.div`
-  width: 100%;
+export const NewModalContent = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  padding: 0 2.4rem 2.4rem;
 `;
 
-export const Heading = styled.div`
+export const NewHeading = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
 `;
 
-export const Title = styled.h4`
+export const NewTitle = styled.h4`
   flex: 1;
   padding: 1.6rem 2.4rem 1.2rem;
   margin: 0;
@@ -76,38 +71,33 @@ export const Title = styled.h4`
   color: #2f3749;
 `;
 
-export const ButtonContainer = styled.div`
-  width: 100%;
+export const NewButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-export const SingleButtonContainer = styled(ButtonContainer)`
+export const NewSingleButtonContainer = styled(NewButtonContainer)`
   justify-content: right;
 `;
 
-export const ModalStickyFooter = styled.div`
-  box-sizing: border-box;
+export const NewModalStickyFooter = styled.div`
   width: 100%;
+  box-sizing: border-box;
   padding: 1.6rem 2.4rem;
   background-color: white;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
-  position: absolute;
-  bottom: 0;
-  left: 0;
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
 `;
 
-export const FormContainer = styled.form`
+export const NewFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 2.4rem;
 `;
 
-export const FormFields = styled.div`
+export const NewFormFields = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -115,7 +105,7 @@ export const FormFields = styled.div`
   gap: 1rem;
 `;
 
-export const TextField = styled.input`
+export const NewTextField = styled.input`
   height: 30px;
   border-radius: 0.4rem;
 
@@ -128,7 +118,7 @@ export const TextField = styled.input`
   }
 `;
 
-export const Hint = styled.h4`
+export const NewHint = styled.h4`
   box-sizing: border-box;
   padding: 1.6rem;
   font-family: "Open Sans";

@@ -10,7 +10,6 @@ export const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  bottom: var(--offset-h, 0);
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
@@ -29,8 +28,7 @@ export const Modal = styled.div<{
     width: 100%;
     display: flex;
     flex-direction: column;
-    // position: relative;
-    position: absolute;
+    position: relative;
     border-radius: 0.4rem;
     background-color: white;
     box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.25);
